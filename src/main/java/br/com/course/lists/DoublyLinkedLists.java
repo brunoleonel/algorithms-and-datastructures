@@ -1,8 +1,8 @@
 package br.com.course.lists;
 
-import br.com.course.lists.singlelinked.EmployeeLinkedList;
+import br.com.course.lists.doublylinked.EmployeeDoublyLinkedList;
 
-public class LinkedLists {
+public class DoublyLinkedLists {
     
     public static void main(String[] args) {
         
@@ -11,7 +11,7 @@ public class LinkedLists {
         Employee johnDeacon = new Employee("John", "Deacon", 12);
         Employee brianMay = new Employee("Brian", "May", 22);
 
-        EmployeeLinkedList linkedList = new EmployeeLinkedList();
+        EmployeeDoublyLinkedList linkedList = new EmployeeDoublyLinkedList();
         linkedList.addToFront(johnDoe);
         linkedList.addToFront(janeDoe);
         linkedList.addToFront(johnDeacon);
@@ -21,6 +21,10 @@ public class LinkedLists {
         System.out.println(linkedList.getSize());
         linkedList.printList();
         linkedList.removeFromFront();
+        linkedList.printList();
+        linkedList.addToEnd(new Employee("Johny", "Lawrence", 27));
+        linkedList.printList();
+        linkedList.removeFromEnd();
         linkedList.printList();
     }
 }

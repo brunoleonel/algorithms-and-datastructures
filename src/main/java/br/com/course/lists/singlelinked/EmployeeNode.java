@@ -1,4 +1,6 @@
-package br.com.course.lists;
+package br.com.course.lists.singlelinked;
+
+import br.com.course.lists.Employee;
 
 public class EmployeeNode {
     
