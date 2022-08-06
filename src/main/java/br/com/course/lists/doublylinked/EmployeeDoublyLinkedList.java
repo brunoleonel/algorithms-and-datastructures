@@ -1,6 +1,6 @@
 package br.com.course.lists.doublylinked;
 
-import br.com.course.lists.Employee;
+import br.com.course.common.Employee;
 
 public class EmployeeDoublyLinkedList {
     

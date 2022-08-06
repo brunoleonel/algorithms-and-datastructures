@@ -3,6 +3,8 @@ package br.com.course.lists;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.course.common.Employee;
+
 public class ArrayLists {
     
     public static void main(String[] args) {

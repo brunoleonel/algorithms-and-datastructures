@@ -3,6 +3,8 @@ package br.com.course.lists;
 import java.util.List;
 import java.util.Vector;
 
+import br.com.course.common.Employee;
+
 public class Vectors {
     
     public static void main(String[] args) {

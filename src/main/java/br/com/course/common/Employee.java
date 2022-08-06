@@ -1,4 +1,4 @@
-package br.com.course.lists;
+package br.com.course.common;
 
 public class Employee {
     
