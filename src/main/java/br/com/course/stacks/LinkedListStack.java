@@ -1,6 +1,5 @@
 package br.com.course.stacks;
 
-import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
