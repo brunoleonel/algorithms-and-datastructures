@@ -1,40 +1,99 @@
 package br.com.course.hashtables;
 
 import br.com.course.common.Employee;
+import br.com.course.common.KeyValueEmployee;
 
 public class SimpleHashTable {
     
-    private Employee[] hashtable;
+    private KeyValueEmployee[] hashtable;
 
     public SimpleHashTable() {
-        hashtable = new Employee[10];
+        hashtable = new KeyValueEmployee[10];
     }
 
     public void put(String key, Employee employee) {
         int hash = hashKey(key);
         
-        if (hashtable[hash] != null) {
+        if (occupied(hash)) {
+            int stopIndex = hash;
+            if (hash == hashtable.length - 1) {
+                hash = 0;
+            } else {
+                hash++;
+            }
+
+            while (occupied(hash) && hash != stopIndex) {
+                hash = (hash + 1) % hashtable.length;
+            }
+        }
+
+        if (occupied(hash)) {
             System.out.println("Sorry, position " + hash + " is not available.");
         } else {
-            hashtable[hash] = employee;
+            hashtable[hash] = new KeyValueEmployee(key, employee);
         }
     }
 
     public Employee get(String key) {
-        int hash = hashKey(key);
-        if (hashtable[hash] == null) {
-            System.out.println("Element not found with key " + hash);
+        int hash = findKey(key);
+        if (hash == -1) {
+            return null;
         }
-        return hashtable[hash];
+        return hashtable[hash].getEmployee();
+    }
+
+    public Employee remove(String key) {
+        int hash = findKey(key);
+        if (hash == -1) {
+            return null;
+        }
+
+        Employee employee = hashtable[hash].getEmployee();
+        hashtable[hash] = null;
+        return employee;
     }
 
     private int hashKey(String key) {
         return key.length() % hashtable.length;
     }
 
+    private boolean occupied(int index) {
+        return hashtable[index] != null;
+    }
+
+    private int findKey(String key) {
+        int hash = hashKey(key);
+        if (hashtable[hash] != null && key.equals(hashtable[hash].getKey())) {
+            return hash;
+        }
+        
+        int stopIndex = hash;
+        if (hash == hashtable.length - 1) {
+            hash = 0;
+        } else {
+            hash++;
+        }
+
+        while (hash != stopIndex && 
+            hashtable[hash] != null && 
+            !key.equals(hashtable[hash].getKey())) {
+            hash = (hash + 1) % hashtable.length;
+        }
+
+        if (hashtable[hash] != null && key.equals(hashtable[hash].getKey())) {
+            return hash;
+        }
+
+        return -1;
+    }
+
     public void print() {
         for (int i = 0; i < hashtable.length; i++) {
-            System.out.println(hashtable[i]);
+            if (hashtable[i] == null) {
+                System.out.println(i + "=>  Empty");
+            } else {
+                System.out.println(i + " => " + hashtable[i].getEmployee());
+            }
         }
     }
 
@@ -52,14 +111,14 @@ public class SimpleHashTable {
 
         System.out.println("-------------");
 
-        hashTable.put("Jacobs", new Employee("Anthony", "Jacobs", 6));
+        hashTable.put("Wilson", new Employee("Anthony", "Wilson", 6));
+
+        hashTable.print();
 
         System.out.println("-------------");
 
-        hashTable.get("Jacobs");
+        hashTable.remove("Wilson");
 
-        System.out.println("-------------");
-
-        hashTable.get("Richards");
+        hashTable.print();
     }
 }
