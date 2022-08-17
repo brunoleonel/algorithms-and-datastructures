@@ -50,6 +50,15 @@ public class SimpleHashTable {
 
         Employee employee = hashtable[hash].getEmployee();
         hashtable[hash] = null;
+        KeyValueEmployee[] oldHashtable = hashtable;
+        hashtable = new KeyValueEmployee[oldHashtable.length];
+        
+        for (int i = 0; i < hashtable.length; i++) {
+            if (oldHashtable[i] != null) {
+                put(oldHashtable[i].getKey(), oldHashtable[i].getEmployee());
+            }
+        } 
+
         return employee;
     }
 
